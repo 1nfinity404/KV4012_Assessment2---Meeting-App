@@ -44,7 +44,21 @@ def create_meeting_page():
     clear()
     put_html("<h1 class = text-center>Create New Meeting</h1>")
 
+def user_profile_page():
+    clear()
+    put_html("<h1 class = text-center>Profile</h1>")
 
 
 if __name__ == '__main__':
-    start_server(user_login_page, port=5000, debug=True)
+    routes = {
+        'index': user_login_page,
+        'register': register_page,
+        'password_reset': password_reset_page,
+        'tutor_meeting': tutor_meeting_page,
+        'notifications': notifications_page,
+        'tutors': tutors_page,
+        'tutor_profile': tutor_profile_page,
+        'create_meeting': create_meeting_page,
+        'user_profile': user_profile_page
+    }
+    start_server(routes, port=5000, debug=True)
