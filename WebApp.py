@@ -3,7 +3,9 @@ from pywebio.output import *
 from pywebio import start_server
 from datetime import datetime
 
-def log_in_page():
+def user_login_page():
+    clear()
+    global users
     put_html("<h1 class = text-center>Log In</h1>")
 
     log_account = input_group('', [
@@ -15,10 +17,34 @@ def log_in_page():
     put_html("<h2 class = text-center>Register</h2>")
 
 def password_reset_page():
+    clear()
     put_html("<h1 class = text-center>Password Reset</h1>")
 
 def register_page():
+    clear()
     put_html("<h1 class = text-center>Register</h1>")
 
+def tutor_meeting_page():
+    clear()
+    put_html("<h1 class = text-center>Tutor Meetings</h1>")
 
-log_in_page()
+def notifications_page():
+    clear()
+    put_html("<h1 class = text-center>Notifications</h1>")
+
+def tutors_page():
+    clear()
+    put_html("<h1 class = text-center>Tutors</h1>")
+
+def tutor_profile_page():
+    clear()
+    put_html("<h1 class = text-center>Profile</h1>")
+
+def create_meeting_page():
+    clear()
+    put_html("<h1 class = text-center>Create New Meeting</h1>")
+
+
+
+if __name__ == '__main__':
+    start_server(user_login_page, port=5000, debug=True)
