@@ -5,7 +5,6 @@ from datetime import datetime
 
 def user_login_page():
     clear()
-    global users
     put_html("<h1 class = text-center>Log In</h1>")
 
     log_account = input_group('', [
@@ -13,7 +12,8 @@ def user_login_page():
         input("Password", name="password", required=True, type= PASSWORD)
     ], )
 
-    put_html("<h2 class = text-center>For Password?</h2>")
+    put_link('For Password?', url='?app=password_reset')
+    put_html("<h2 class = text-center>Forgot Password?</h2>")
     put_html("<h2 class = text-center>Register</h2>")
 
 def password_reset_page():
