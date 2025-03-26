@@ -7,9 +7,9 @@ def user_login_page():
     clear()
     put_html("<h1 class = text-center>Log In</h1>")
 
-    log_account = input_group('', [
+    input_group('', [
         input("Username", name="name", required=True),
-        input("Password", name="password", required=True, type= PASSWORD)
+        input("Password", name="password", required=True, type=PASSWORD)
     ], )
 
     put_link('For Password?', url='?app=password_reset')
@@ -51,7 +51,7 @@ def user_profile_page():
 
 if __name__ == '__main__':
     routes = {
-        'index': user_login_page,
+        'login': user_login_page,
         'register': register_page,
         'password_reset': password_reset_page,
         'tutor_meeting': tutor_meeting_page,
