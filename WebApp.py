@@ -31,10 +31,9 @@ def validate_name(name: str) -> bool:
     else:
         return False
 
-
 user = Class.User("name", 12345678, "00/00/0000", "something@email.com", "username", "password")
-user_database_extract = None
-user_extract = None
+user_database_extract = []
+user_extract = []
 username_remind = ""
 
 # Login user page
@@ -55,28 +54,25 @@ def user_login_page():
         input("Password", name="password", required=True, type=PASSWORD)
     ])
 
-    username_remind = user_login["Username"]
+    username_remind = user_login["username"]
 
     if user.username == user_login["username"] and user.password == user_login["password"]:
         toast(f"Welcome, {user.username}", 5)
     elif user.username != user_login["username"] and user.password != user_login["password"]:
         with open("user_database.txt", "r") as file:
             user_database_extract = f"{file.readline()}"
+            user_database_extract.removesuffix(",")
             user_database_extract.split(",")
-            user_database_extract.pop()
             for user_info in user_database_extract:
                 if user_login["username"] in user_info and user_login["password"] in user_info:
                     user_extract = user_info
                     user_extract.split("#")
-                    user.name = user_extract[0]
-                    user.student_id = user_extract[1]
-                    user.date_of_birth = user_extract[2]
-                    user.email_address = user_extract[3]
-                    user.username = user_extract[4]
-                    user.password = user_extract[5]
-                    toast(f"Welcome, {user.username}", 5)
-                    tutor_meeting_page()
+                    user = Class.User(user_extract[0],user_extract[1],user_extract[2],user_extract[3],user_extract[4],user_extract[5])
 
+            toast(f"Welcome, {user.username}", 5)
+            tutor_meeting_page()
+    else:
+        toast("Login Error!",5)
 
 # Password reset page
 def password_reset_page():
@@ -96,8 +92,8 @@ def password_reset_page():
     elif password_reset["new_password"] == password_reset["confirm_password"]:
         with open("user_database.txt", "r") as file:
             user_database_extract = f"{file.readline()}"
+            user_database_extract.removesuffix(",")
             user_database_extract.split(",")
-            user_database_extract.pop()
             for user_info in user_database_extract:
                 if username_remind in user_database_extract:
                     user_extract = user_info
@@ -108,7 +104,7 @@ def password_reset_page():
                     user.email_address = user_extract[3]
                     user.username = user_extract[4]
                     user.password = password_reset["new_password"]
-                    user_database_extract.replace(f"{user_info}", f"{user}")
+                    user_database_extract.replace(f"{user_info}", f",{user},")
                     toast("Password Has Been Reset")
                     register_page()
     else:

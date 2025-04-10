@@ -1,6 +1,6 @@
 class User:
-    name = None
-    student_id = "w"
+    name = ""
+    student_id = None
     date_of_birth = None
     email_address = None
     username = None
@@ -8,7 +8,7 @@ class User:
 
     def __init__(self, name, student_id, dob, email, username, password):
         self.name = name
-        self.student_id += str(student_id)
+        self.student_id = str(student_id)
         self.date_of_birth = dob
         self.email_address = email
         self.username = username
