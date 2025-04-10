@@ -3,7 +3,6 @@ from pywebio.output import *
 from pywebio import start_server
 from datetime import datetime
 import re
-
 import Classes as Class
 
 
@@ -34,25 +33,49 @@ def validate_name(name: str) -> bool:
 
 
 user = Class.User("name", 12345678, "00/00/0000", "name@email.com", "username", "password")
-
+user_database_extract = None
+user_extract = None
 
 # Login user page
 def user_login_page():
     clear()
+    global user_database_extract
+    global user_extract
+    global user
+
     put_html("<h1 class='text-center'>Log In</h1>")
 
     link("?app=password_reset", "Forgot Password?")
     link("?app=register", "Register")
 
     user_login = input_group('', [
-        input("Username", name="name", required=True),
+        input("Username", name="username", required=True),
         input("Password", name="password", required=True, type=PASSWORD)
     ])
+    if user.username == user_login["username"] and user.password == user_login["password"]:
+        toast(f"Welcome, {user.username}", 5)
+    elif user.username != user_login["username"] and user.password != user_login["password"]:
+        with open("user_database.txt", "r") as file:
+            user_database_extract = f"{file.readline()}"
+            user_database_extract.split(",")
+            for user_info in user_database_extract:
+                if user_login["username"] in user_info and user_login["password"] in user_info:
+                    user_extract = user_info
+                    user_extract.split("#")
+                    user.name = user_extract[0]
+                    user.student_id = user_extract[1]
+                    user.date_of_birth = user_extract[2]
+                    user.email_address = user_extract[3]
+                    user.username = user_extract[4]
+                    user.password = user_extract[5]
+                    toast(f"Welcome, {user.username}", 5)
+                    tutor_meeting_page()
 
 
 # Password reset page
 def password_reset_page():
     clear()
+
     put_html("<h1 class='text-center'>Password Reset</h1>")
 
     password_reset = input_group('', [
@@ -91,15 +114,16 @@ def register_page():
     elif 5 > len(user_register["password"]) > 15:
         toast("Your password is too short or long!", 5)
         register_page()
-    elif "#" in user_register["name"] or "#" in user_register["password"]:
-        toast("Your username and password should not contain #!", 5)
-        register_page()
+    #elif "#" in user_register["name"] or "#" in user_register["password"]:
+        #toast("Your username and password should not contain #!", 5)
+        #register_page()
     else:
         user = Class.User(user_register['name'], user_register["student_id"], user_register['dob'],
                           user_register['email'], user_register['username'], user_register['password'])
         with open("user_database.txt", "a") as file:
             file.write(f"{user},")
-
+        toast("Account created!", 5)
+        user_login_page()
 
 #
 def tutor_meeting_page():
