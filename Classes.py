@@ -15,4 +15,4 @@ class User:
         self.password = password
 
     def __str__(self):
-        return f"{self.name}#{self.student_id}#{self.email_address}#{self.username}#{self.password}"
+        return f"{self.name}#{self.student_id}#{self.date_of_birth}#{self.email_address}#{self.username}#{self.password}"

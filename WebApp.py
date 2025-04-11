@@ -39,8 +39,6 @@ username_remind = ""
 # Login user page
 def user_login_page():
     clear()
-    global user_database_extract
-    global user_extract
     global user
     global username_remind
 
@@ -64,15 +62,18 @@ def user_login_page():
             user_database_extract.removesuffix(",")
             user_database_extract.split(",")
             for user_info in user_database_extract:
-                if user_login["username"] in user_info and user_login["password"] in user_info:
+                if f"{user_login["username"]}" in user_info and f"{user_login["password"]}" in user_info:
                     user_extract = user_info
                     user_extract.split("#")
-                    user = Class.User(user_extract[0],user_extract[1],user_extract[2],user_extract[3],user_extract[4],user_extract[5])
+                    user.name = user_extract[0]
+                    user.student_id = user_extract[1]
+                    user.date_of_birth = user_extract[2]
+                    user.email_address = user_extract[3]
+                    user.username = user_extract[4]
+                    user.password = user_extract[5]
+                    toast(f"Welcome, {user.username}", 5)
+                    tutor_meeting_page()
 
-            toast(f"Welcome, {user.username}", 5)
-            tutor_meeting_page()
-    else:
-        toast("Login Error!",5)
 
 # Password reset page
 def password_reset_page():
@@ -154,6 +155,7 @@ def register_page():
 #
 def tutor_meeting_page():
     clear()
+    toast(f"Welcome, {user.username}", 5)
     put_html("<h1 class='text-center'>Tutor Meetings</h1>")
 
 
