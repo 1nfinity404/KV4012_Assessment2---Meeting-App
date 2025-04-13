@@ -5,6 +5,25 @@ from pywebio import start_server
 import re
 import Classes as Class
 
+navbar = """
+<ul class="nav justify-content-center bg-primary fixed-top border border-black nav-fill">
+    <li class="nav-item border border-black">
+        <a class="nav-link" aria-current="page" href="?app=tutor_meeting">
+           tutor
+        </a>
+    </li>
+    <li class="nav-item border border-black">
+        <a class="nav-link" href="?app=tutor_meeting">
+           tutor
+        </a>
+    </li>
+    <li class="nav-item border border-black">
+        <a class="nav-link" href="?app=tutor_meeting">
+          tutor
+        </a>
+    </li>
+</ul>
+"""
 
 def link(url, name):
     put_html(f"<div style='text-align:center;'><a href={url}>{name}</a></div>")
@@ -155,7 +174,7 @@ def register_page():
 #
 def tutor_meeting_page():
     clear()
-    toast(f"Welcome, {user.username}", 5)
+    put_html(navbar)
     put_html("<h1 class='text-center'>Tutor Meetings</h1>")
 
 
