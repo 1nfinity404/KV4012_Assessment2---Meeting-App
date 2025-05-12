@@ -4,6 +4,7 @@ from pywebio import start_server
 #from datetime import datetime
 import re
 import Classes as Class
+import NavBar as nav
 
 navbar = """
 <ul class="nav justify-content-center bg-primary fixed-top border border-black nav-fill">
@@ -174,19 +175,21 @@ def register_page():
 #
 def tutor_meeting_page():
     clear()
-    put_html(navbar)
+    nav.navbar("?app=user_profile", "Profile", "?app=notifications", "Notifications", "?app=tutors", "Tutors")
     put_html("<h1 class='text-center'>Tutor Meetings</h1>")
 
 
 #
 def notifications_page():
     clear()
+    nav.navbar("?app=user_profile", "Profile", "?app=tutor_meeting", "Meetings", "?app=tutors", "Tutors")
     put_html("<h1 class='text-center'>Notifications</h1>")
 
 
 #
 def tutors_page():
     clear()
+    nav.navbar("?app=user_profile", "Profile", "?app=tutor_meeting", "Meetings", "?app=notifications", "Notifications")
     put_html("<h1 class='text-center'>Tutors</h1>")
 
 
