@@ -178,6 +178,8 @@ def tutor_meeting_page():
     nav.navbar("?app=user_profile", "Profile", "?app=notifications", "Notifications", "?app=tutors", "Tutors")
     put_html("<h1 class='text-center'>Tutor Meetings</h1>")
 
+    put_link("Add New Meeting","?app=create_meeting")
+
 
 #
 def notifications_page():
@@ -205,13 +207,26 @@ def tutor_profile_page():
 def create_meeting_page():
     clear()
     put_html("<h1 class ='text-center'>Create New Meeting</h1>")
-
+    meeting_create = input_group('', [
+        input("Meeting Title", name="meeting_title", required=True),
+        input("Tutor Name", name="tutor_name", required=True),
+        input("Meeting Description", name="meeting_info", required=True)
+        ])
+    tutor_meeting_page()
 
 # User Profile Page
 def user_profile_page():
     clear()
+    nav.navbar("?app=tutor_meeting", "Meetings", "?app=notifications", "Notifications", "?app=tutors", "Tutors")
     put_html("<h1 class ='text-center'>Profile</h1>")
 
+    profile_image = """
+    <div class="jumbotron text-center bg-white py-3">
+    <div class="container">
+        <h3 class=" fw-semibold display-4">User Profile: </h3>
+    </div>
+</div>
+    """
 
 if __name__ == '__main__':
     routes = {
