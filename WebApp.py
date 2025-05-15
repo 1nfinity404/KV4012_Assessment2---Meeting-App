@@ -172,7 +172,7 @@ def register_page():
         toast("Account created!", 5)
         user_login_page()
 
-#
+# tutor meeting page
 def tutor_meeting_page():
     clear()
     nav.navbar("?app=user_profile", "Profile", "?app=notifications", "Notifications", "?app=tutors", "Tutors")
@@ -181,29 +181,125 @@ def tutor_meeting_page():
     put_link("Add New Meeting","?app=create_meeting")
 
 
-#
+# notification page
 def notifications_page():
     clear()
     nav.navbar("?app=user_profile", "Profile", "?app=tutor_meeting", "Meetings", "?app=tutors", "Tutors")
     put_html("<h1 class='text-center'>Notifications</h1>")
 
+    notification_show = input_group('', [
+        input("Notification 1", name="notification1", required=True),
+        input("Notification 2", name="notification2", required=True),
+        input("Notification 3", name="notification3", required=True),
+        input("Notification 4", name="notification4", required=True),
+    ])
 
-#
+# tutors' page
 def tutors_page():
     clear()
     nav.navbar("?app=user_profile", "Profile", "?app=tutor_meeting", "Meetings", "?app=notifications", "Notifications")
     put_html("<h1 class='text-center'>Tutors</h1>")
 
+    tutor_list_html = f"""
+        <table class="table text-center text-primary">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor"
+                            class="bi bi-circle"
+                            viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                        </svg>
+                    </th>
+                    <th scope="col">
+                        {put_link("Tutor 1", "?app=tutor_profile")}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor"
+                            class="bi bi-circle"
+                            viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                        </svg>
+                    </td>
+                    <td>{put_link("Tutor 2", "?app=tutor_profile")}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor"
+                            class="bi bi-circle"
+                            viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                        </svg>
+                    </td>
+                    <td>{put_link("Tutor 3", "?app=tutor_profile")}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor"
+                            class="bi bi-circle"
+                            viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                        </svg>
+                    </td>
+                    <td>{put_link("Tutor 4", "?app=tutor_profile")}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor"
+                            class="bi bi-circle"
+                            viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                        </svg>
+                    </td>
+                    <td>{put_link("Tutor 5", "?app=tutor_profile")}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor"
+                            class="bi bi-circle"
+                            viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                        </svg>
+                    </td>
+                    <td>{put_link("Tutor 6", "?app=tutor_profile")}</td>
+                </tr>
+            <tbody>
+        </table>
+    """
+    put_html(tutor_list_html)
 
-#
+
+# tutor profile page
 def tutor_profile_page():
     clear()
     put_html("<a class='btn btn-primary' href='?app=tutors' role='button'>Back</a>")
 
     put_html("<h1 class='text-center'>Profile</h1>")
 
+    tutor_profile = f"""
+            <div class="jumbotron text-center bg-white py-3">
+                <div class="container">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor"
+                        class="bi bi-circle"
+                        viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    </svg>
+                </div>
+                <div class = "container">
+                    Name
+                    Office Location
+                    Email
+                    Drop-in hours
+                </div>
+            </div>
+            """
+    put_html(tutor_profile)
 
-#
+# page for creating meeting
 def create_meeting_page():
     clear()
     put_html("<h1 class ='text-center'>Create New Meeting</h1>")
@@ -220,13 +316,25 @@ def user_profile_page():
     nav.navbar("?app=tutor_meeting", "Meetings", "?app=notifications", "Notifications", "?app=tutors", "Tutors")
     put_html("<h1 class ='text-center'>Profile</h1>")
 
-    profile_image = """
+    user_profile = f"""
     <div class="jumbotron text-center bg-white py-3">
-    <div class="container">
-        <h3 class=" fw-semibold display-4">User Profile: </h3>
+        <div class="container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor"
+                class="bi bi-circle"
+                viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+            </svg>
+        </div>
+        <div class = "container">
+            {user.name}
+            {user.date_of_birth}
+            {user.student_id}
+            {user.email_address}
+            Level
+        </div>
     </div>
-</div>
     """
+    put_html(user_profile)
 
 if __name__ == '__main__':
     routes = {
