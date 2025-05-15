@@ -96,7 +96,7 @@ def user_login_page():
                     user.password = user_extract[5]
                     toast(f"Welcome, {user.username}", 5)
                     tutor_meeting_page()
-
+            tutor_meeting_page()
 
 # Password reset page
 def password_reset_page():
